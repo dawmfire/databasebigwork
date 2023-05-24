@@ -1,0 +1,56 @@
+JFDML JFormDesigner: "7.0.7.0.1134" Java: "11.0.14.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			"minimumSize": new java.awt.Dimension( 800, 800 )
+			"visible": true
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "tabbedPane1"
+				"selectedIndex": 0
+				"minimumSize": new java.awt.Dimension( 800, 800 )
+				addEvent( new FormEvent( "javax.swing.event.AncestorListener", "ancestorAdded", "tabbedPane1AncestorAdded", true ) )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel1"
+					addEvent( new FormEvent( "javax.swing.event.AncestorListener", "ancestorAdded", "panel1AncestorAdded", true ) )
+				}, new FormLayoutConstraints( null ) {
+					"title": "管理员信息"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel2"
+					addEvent( new FormEvent( "javax.swing.event.AncestorListener", "ancestorAdded", "panel2AncestorAdded", true ) )
+				}, new FormLayoutConstraints( null ) {
+					"title": "库房信息"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel3"
+					addEvent( new FormEvent( "javax.swing.event.AncestorListener", "ancestorAdded", "panel3AncestorAdded", true ) )
+				}, new FormLayoutConstraints( null ) {
+					"title": "出入库记录"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel4"
+					addEvent( new FormEvent( "javax.swing.event.AncestorListener", "ancestorAdded", "panel4AncestorAdded", true ) )
+				}, new FormLayoutConstraints( null ) {
+					"title": "零件信息"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel5"
+					addEvent( new FormEvent( "javax.swing.event.AncestorListener", "ancestorAdded", "panel5AncestorAdded", true ) )
+				}, new FormLayoutConstraints( null ) {
+					"title": "个人信息"
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 0
+				"y": 0
+				"width": 925
+				"height": 690
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 930, 725 )
+		} )
+	}
+}
