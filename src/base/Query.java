@@ -10,6 +10,7 @@ public class Query {
     int columnCount;
     PreparedStatement preSql;
     String[][] tableHeader;
+    String [] onePart;
     ArrayList<managerRecord> manager;      //管理员信息储存的集合
     Connection con = JDBC.connectdb("ware", "root", "");
     //登录信息
@@ -185,5 +186,32 @@ public class Query {
         }
 
         return tableHeader;
+    }
+    //寻找某零件库存情况
+    public storePartRecord findOnePart(String x){
+        storePartRecord storepart=new storePartRecord();
+        Sql="SELECT * from partinout where pname=?";
+        try {
+            preSql = con.prepareStatement(Sql);
+            preSql.setString(1, x);
+            rs= preSql.executeQuery();
+            while (rs.next()) {
+                storepart.setPartID(rs.getInt(1));
+                storepart.setPartName(rs.getString(2));
+                storepart.setAmount(rs.getInt(3));
+                storepart.setWarehouseID(rs.getInt(4));
+                storepart.setNumber(rs.getInt(5));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return storepart;
+    }
+    //出入信息更新与插入
+    public void insertOrUpdate(storePartRecord storepart){
+    Sql="update part set amount = ? where Pid = ?";
+    Sql="update store set number = ? where Wid = ?";
+    Sql="insert into inbound(operaterid, pid,intime,inpartamount) values(?, ? ,NOW(), ?)";
     }
 }

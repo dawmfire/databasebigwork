@@ -4,6 +4,9 @@
 
 package view.normal;
 
+import java.awt.event.*;
+
+import action.outAction;
 import base.managerRecord;
 
 import java.awt.*;
@@ -18,6 +21,12 @@ public class Outbound extends JFrame {
 
         this.ma = ma;
         initComponents();
+    }
+    //³ö¿â¼àÌýÆ÷
+    private void button1(ActionEvent e) {
+        // TODO add your code here
+        outAction out = new outAction(ma,this);
+        out.outRecord();
     }
 
     private void initComponents() {
@@ -37,6 +46,7 @@ public class Outbound extends JFrame {
 
         //---- button1 ----
         button1.setText("\u51fa\u5e93");
+        button1.addActionListener(e -> button1(e));
         contentPane.add(button1);
         button1.setBounds(220, 340, 90, 45);
         contentPane.add(textField2);
@@ -82,8 +92,8 @@ public class Outbound extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JButton button1;
-    private JTextField textField2;
-    private JTextField textField3;
+    public JTextField textField2;
+    public JTextField textField3;
     private JLabel label1;
     private JLabel label2;
     private JButton button2;
