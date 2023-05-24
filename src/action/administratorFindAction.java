@@ -19,6 +19,7 @@ public class administratorFindAction {
     public void actionPerformed(){
         Query query =new Query();
         tableHeader=query.statrfindMangerRecords(Mid);
+
         if (!Mid.equals("")) {
             for (int i = 0; i < am.tableHeader.length; i++) {
                 am.model.removeRow(0);

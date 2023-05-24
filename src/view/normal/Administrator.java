@@ -39,14 +39,27 @@ public class Administrator extends JFrame {
         textField1 = new JTextField();
         label1 = new JLabel();
         button3 = new JButton();
+        query = new Query();
+        tableHeader =query.statrManagerRecordQuery();
+        columnNames = new String[] { "管理员id", "管理员名字", "性别", "电话","所属库房"};
+        model = new DefaultTableModel(tableHeader,columnNames){
+            //设置表格全部行列都不可以编辑
+            @Override
+            public boolean isCellEditable(int row , int column){
 
+                return false;
+            }
+        };
+        JTable table = new JTable(model);
         //======== this ========
         setVisible(true);
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
-
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setResizingAllowed(false);
         //======== panel1 ========
         {
+            contentPane.add(new JScrollPane(table),BorderLayout.CENTER);
             panel1.setPreferredSize(new Dimension(523, 50));
             panel1.setLayout(null);
 
@@ -100,5 +113,9 @@ public class Administrator extends JFrame {
     private JTextField textField1;
     private JLabel label1;
     private JButton button3;
+    public String [][] tableHeader;
+    String[] columnNames;
+    public DefaultTableModel model;
+    Query query;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
