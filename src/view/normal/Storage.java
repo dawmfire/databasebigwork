@@ -4,9 +4,12 @@
 
 package view.normal;
 
+import action.outAction;
+import action.storeAction;
 import base.managerRecord;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 /**
@@ -17,6 +20,12 @@ public class Storage extends JFrame {
     public Storage(managerRecord ma) {
         this.ma = ma;
         initComponents();
+    }
+    //Èë¿â¼àÌýÆ÷
+    private void button1(ActionEvent e) {
+        // TODO add your code here
+        storeAction in = new storeAction(ma,this);
+        in.inRecord();
     }
 
     private void initComponents() {
@@ -38,6 +47,7 @@ public class Storage extends JFrame {
 
             //---- button1 ----
             button1.setText("\u5165\u5e93");
+            button1.addActionListener(e -> button1(e));
             this2ContentPane.add(button1);
             button1.setBounds(220, 340, 90, 45);
             this2ContentPane.add(textField2);
@@ -85,8 +95,8 @@ public class Storage extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JFrame this2;
     private JButton button1;
-    private JTextField textField2;
-    private JTextField textField3;
+    public JTextField textField2;
+    public JTextField textField3;
     private JLabel label1;
     private JLabel label2;
     private JButton button2;

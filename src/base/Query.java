@@ -11,6 +11,7 @@ public class Query {
     PreparedStatement preSql;
     String[][] tableHeader;
     String [] onePart;
+
     ArrayList<managerRecord> manager;      //管理员信息储存的集合
     Connection con = JDBC.connectdb("ware", "root", "");
     //登录信息
@@ -210,8 +211,29 @@ public class Query {
     }
     //出入信息更新与插入
     public void insertOrUpdate(storePartRecord storepart){
-    Sql="update part set amount = ? where Pid = ?";
-    Sql="update store set number = ? where Wid = ?";
-    Sql="insert into inbound(operaterid, pid,intime,inpartamount) values(?, ? ,NOW(), ?)";
+
+        try {
+            Sql="update part set amount = ? where Pid = ?";
+            preSql = con.prepareStatement(Sql);
+            preSql.setString(1,String.valueOf(storepart.getAmount()));
+            preSql.setString(2,String.valueOf(storepart.getPartID()));
+            int ok = preSql.executeUpdate();
+            Sql="update store set number = ? where Wid = ?";
+            preSql = con.prepareStatement(Sql);
+            preSql.setString(1,String.valueOf(storepart.getNumber()));
+            preSql.setString(2,String.valueOf(storepart.getWarehouseID()));
+            ok = preSql.executeUpdate();
+            Sql="insert into inbound(operaterid, pid,intime,inpartamount) values(?, ? ,NOW(), ?)";
+            preSql = con.prepareStatement(Sql);
+            preSql.setString(1,String.valueOf(storepart.getManagerid()));
+            preSql.setString(2,String.valueOf(storepart.getPartID()));
+            preSql.setString(3,String.valueOf(storepart.getInoutPartNumber()));
+            ok = preSql.executeUpdate();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

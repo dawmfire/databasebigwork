@@ -3,6 +3,7 @@ package base;
 //作用验证出入库时候，出入情况是否正确
 
 public class storePartRecord {
+    private int managerid;
     private int partID;  // 零件id
     private String partName;  //零件名字
     private int amount; // 零件数量
@@ -56,5 +57,13 @@ public class storePartRecord {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public int getManagerid() {
+        return managerid;
+    }
+
+    public void setManagerid(int managerid) {
+        this.managerid = managerid;
     }
 }

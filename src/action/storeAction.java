@@ -5,24 +5,25 @@ import base.bound;
 import base.managerRecord;
 import base.storePartRecord;
 import view.normal.Outbound;
+import view.normal.Storage;
 
 import javax.swing.*;
 
-public class outAction {
+public class storeAction {
     managerRecord ma;
-    Outbound out;
+    Storage in;
     storePartRecord storepart;
     bound record;
-    public outAction(managerRecord ma, Outbound out) {
+    public storeAction(managerRecord ma, Storage in) {
         this.ma =ma;
-        this.out =out;
+        this.in =in;
 
     }
 
-    public void outRecord() {
+    public void inRecord() {
         Query qe = new Query();
         //提取输入值零件名
-        storepart = qe.findOnePart(out.textField2.getText());
+        storepart = qe.findOnePart(in.textField2.getText());
         record= new bound();
         //判断是否搜索到零件在库房中
         if (storepart != null) {
@@ -30,21 +31,21 @@ public class outAction {
             if(storepart.getWarehouseID()== ma.getWarehouseID()) {
                 storepart.setManagerid(ma.getId());
                 //判断出库数量是否大于零件库存数
-                if(Integer.valueOf(out.textField3.getText())<=storepart.getAmount()) {
+                if(Integer.valueOf(in.textField3.getText())<=storepart.getNumber()) {
                     //库存剩余数量更新
-                    storepart.setNumber(storepart.getNumber()-Integer.valueOf(out.textField3.getText()));
+                    storepart.setNumber(storepart.getNumber()+Integer.valueOf(in.textField3.getText()));
                     //零件数量更新
-                    storepart.setAmount(storepart.getAmount()-Integer.valueOf(out.textField3.getText()));
-                    //出库数量
-                    storepart.setInoutPartNumber(Integer.valueOf(out.textField3.getText()));
+                    storepart.setAmount(storepart.getAmount()+Integer.valueOf(in.textField3.getText()));
+                    //入库数量
+                    storepart.setInoutPartNumber(Integer.valueOf(in.textField3.getText()));
                     qe.insertOrUpdate(storepart);
                 }else{
-                    JOptionPane.showMessageDialog(null, "当年该零件库存为"+
-                            storepart.getAmount()+"不足以出库数量");
+                    JOptionPane.showMessageDialog(null, "该仓库库存为"+
+                            storepart.getNumber()+"超出库存上限");
                 }
             }else{
                 JOptionPane.showMessageDialog(null, "请联" +
-                        "系库房id为"+storepart.getWarehouseID()+"的管理员出库");
+                        "系库房id为"+storepart.getWarehouseID()+"的管理员入库");
             }
         }else{
             JOptionPane.showMessageDialog(null, "查无此零件，请联系高级管" +
@@ -52,3 +53,4 @@ public class outAction {
         }
     }
 }
+
