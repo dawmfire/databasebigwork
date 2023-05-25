@@ -4,8 +4,9 @@
 
 package view.senior;
 
+import base.managerRecord;
+
 import java.awt.*;
-import java.beans.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
@@ -14,11 +15,13 @@ import javax.swing.event.*;
  * @author unknown
  */
 public class SeniorManageOperate extends JFrame {
-    public SeniorManageOperate() {
+    managerRecord ma;
+    public SeniorManageOperate(managerRecord ma) {
+        this.ma = ma;
         initComponents();
     }
 
-    //  管理员界面响应
+    //  零件界面响应
     private void panel4AncestorAdded(AncestorEvent e) {
         PartInformationManager part=new PartInformationManager();
         panel4.add(part.getPanel1());
@@ -30,22 +33,22 @@ public class SeniorManageOperate extends JFrame {
         AdministratorManager ad = new AdministratorManager();
         panel1.add(ad.getPanel1());
     }
-    //  管理员界面响应
+    //  库房界面响应
     private void panel2AncestorAdded(AncestorEvent e) {
         WarehouseInformationManager ware = new WarehouseInformationManager();
         panel2.add(ware.getPanel1());
         // TODO add your code here
     }
-    //  管理员界面响应
+    //  出入记录界面响应
     private void panel3AncestorAdded(AncestorEvent e) {
         // TODO add your code here
         InOutBoundRecords record = new InOutBoundRecords();
         panel3.add(record.getPanel1());
     }
-    //  管理员界面响应
+    //  个人信息界面响应
     private void panel5AncestorAdded(AncestorEvent e) {
         // TODO add your code here
-        PersonalInformationManager personal = new PersonalInformationManager();
+        PersonalInformationManager personal = new PersonalInformationManager(ma);
         panel5.add(personal.getPanel1());
     }
 

@@ -33,7 +33,7 @@ public class AdministratorManager extends JFrame {
 //删除功能
     private void button4(ActionEvent e) {
         // TODO add your code here
-            new deleteChange();
+            new deleteChange("管理员");
     }
 //更新功能
     private void button3(ActionEvent e) {

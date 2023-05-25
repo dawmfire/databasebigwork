@@ -23,7 +23,7 @@ public class LoginAction   {
         if(ma!=null){
             if(ma.getPassword().equals(String.valueOf(login.passwordField1.getPassword()))){
                if(ma.getAccount().matches("[0-9]{6}")){
-                        new SeniorManageOperate();
+                        new SeniorManageOperate(ma);
                         login.dispose();
                 }else{
                     new ManageOperate(ma);

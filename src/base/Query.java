@@ -580,7 +580,21 @@ public class Query {
     }
 
     //删除功能 (库房，管理员，零件信息）
-    public void  deleteInformation(){
-
+    public void  deleteInformation(String text, String choose){
+             if(choose.equals("管理员")){
+                 Sql="delete from manager where Mid=?";
+             }else if(choose.equals("库房")){
+                 Sql="delete from warehouse where Wid=?";
+             }else{
+                 Sql="delete from part where Pid=?";
+             }
+        try {
+            preSql = con.prepareStatement(Sql);
+            preSql.setInt(1,Integer.valueOf(text));
+            int ok = preSql.executeUpdate();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -4,6 +4,8 @@
 
 package view.senior;
 
+import action.deleteAction;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -12,13 +14,16 @@ import javax.swing.*;
  * @author unknown
  */
 public class deleteChange extends JFrame {
-    public deleteChange() {
-        initComponents();
+    String choose;
+    public deleteChange(String choose) {
+
+        this.choose = choose;
+    initComponents();
     }
 
     private void button1(ActionEvent e) {
         // TODO add your code here
-        new deleteAction(this);
+        new deleteAction(this,choose);
     }
 
     private void initComponents() {
@@ -30,7 +35,7 @@ public class deleteChange extends JFrame {
         //======== this ========
         var contentPane = getContentPane();
         contentPane.setLayout(null);
-
+        setVisible(true);
         //---- label1 ----
         label1.setText("\u8bf7\u9009\u62e9\u8981\u5220\u9664\u4fe1\u606f\u7684id");
         contentPane.add(label1);
@@ -65,7 +70,7 @@ public class deleteChange extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel label1;
-    private JTextField textField1;
+    public JTextField textField1;
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

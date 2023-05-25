@@ -11,6 +11,7 @@ import javax.swing.*;
  * @author unknown
  */
 public class InOutBoundRecords extends JFrame {
+
     public InOutBoundRecords() {
         initComponents();
     }

@@ -4,6 +4,8 @@
 
 package view.senior;
 
+import base.managerRecord;
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -11,8 +13,11 @@ import javax.swing.*;
  * @author unknown
  */
 public class PersonalInformationManager extends JFrame {
-    public PersonalInformationManager() {
+    managerRecord ma;
+    public PersonalInformationManager(managerRecord ma) {
+        this.ma = ma;
         initComponents();
+        display();
     }
 
     public JPanel getPanel1() {
@@ -22,15 +27,15 @@ public class PersonalInformationManager extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel1 = new JPanel();
-        panel3 = new JPanel();
-        label6 = new JLabel();
-        label13 = new JLabel();
-        panel2 = new JPanel();
-        label4 = new JLabel();
-        label12 = new JLabel();
         panel18 = new JPanel();
         label5 = new JLabel();
         label11 = new JLabel();
+        panel2 = new JPanel();
+        label4 = new JLabel();
+        label12 = new JLabel();
+        panel3 = new JPanel();
+        label6 = new JLabel();
+        label13 = new JLabel();
         panel4 = new JPanel();
         label7 = new JLabel();
         label14 = new JLabel();
@@ -55,16 +60,17 @@ public class PersonalInformationManager extends JFrame {
         {
             panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
 
-            //======== panel3 ========
+            //======== panel18 ========
             {
-                panel3.setLayout(new BorderLayout());
+                panel18.setMinimumSize(new Dimension(0, 30));
+                panel18.setLayout(new BorderLayout());
 
-                //---- label6 ----
-                label6.setText("\u6027\u522b\uff1a");
-                panel3.add(label6, BorderLayout.LINE_START);
-                panel3.add(label13, BorderLayout.CENTER);
+                //---- label5 ----
+                label5.setText("\u5de5\u53f7\uff1a");
+                panel18.add(label5, BorderLayout.LINE_START);
+                panel18.add(label11, BorderLayout.CENTER);
             }
-            panel1.add(panel3);
+            panel1.add(panel18);
 
             //======== panel2 ========
             {
@@ -78,17 +84,16 @@ public class PersonalInformationManager extends JFrame {
             }
             panel1.add(panel2);
 
-            //======== panel18 ========
+            //======== panel3 ========
             {
-                panel18.setMinimumSize(new Dimension(0, 30));
-                panel18.setLayout(new BorderLayout());
+                panel3.setLayout(new BorderLayout());
 
-                //---- label5 ----
-                label5.setText("\u5de5\u53f7\uff1a");
-                panel18.add(label5, BorderLayout.LINE_START);
-                panel18.add(label11, BorderLayout.CENTER);
+                //---- label6 ----
+                label6.setText("\u6027\u522b\uff1a");
+                panel3.add(label6, BorderLayout.LINE_START);
+                panel3.add(label13, BorderLayout.CENTER);
             }
-            panel1.add(panel18);
+            panel1.add(panel3);
 
             //======== panel4 ========
             {
@@ -169,18 +174,33 @@ public class PersonalInformationManager extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
+    public  void display(){
+        label11.setText(String.valueOf(ma.getId())); //工号
+        label12.setText(ma.getName());  //姓名
+        if(ma.getSex().equals("w")){    //性别
+            label13.setText("女");
+        }else{
+            label13.setText("男");
+        }
+        label14.setText(String.valueOf(ma.getAge()));//年龄
+        label15.setText(ma.getPhone());//电话
+        label16.setText(String.valueOf(ma.getSalary()));//工资
+        label17.setText(ma.getAccount());//账号
+        label19.setText(ma.getPassword());//密码
+
+    }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel1;
-    private JPanel panel3;
-    private JLabel label6;
-    private JLabel label13;
-    private JPanel panel2;
-    private JLabel label4;
-    private JLabel label12;
     private JPanel panel18;
     private JLabel label5;
     private JLabel label11;
+    private JPanel panel2;
+    private JLabel label4;
+    private JLabel label12;
+    private JPanel panel3;
+    private JLabel label6;
+    private JLabel label13;
     private JPanel panel4;
     private JLabel label7;
     private JLabel label14;
