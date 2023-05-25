@@ -10,8 +10,7 @@ public class administratorFindAction {
     String Mid;
     Administrator am;
     String [][] tableHeader;
-    String[] columnNames;
-    DefaultTableModel model;
+
     public administratorFindAction(String x, Administrator am){
         this.Mid = x;
         this.am = am;

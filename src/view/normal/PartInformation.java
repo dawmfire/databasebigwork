@@ -4,8 +4,13 @@
 
 package view.normal;
 
+import action.partInformationAction;
+import base.Query;
+
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author unknown
@@ -15,6 +20,17 @@ public class PartInformation extends JFrame {
         initComponents();
     }
 
+    private void button2(ActionEvent e) {
+        // TODO add your code here
+        dispose();
+    }
+    //以零件名为条件
+    private void button1(ActionEvent e) {
+        // TODO add your code here
+        partInformationAction pa= new partInformationAction(this,textField1.getText());
+        pa.findpartRecord();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel1 = new JPanel();
@@ -22,18 +38,33 @@ public class PartInformation extends JFrame {
         textField1 = new JTextField();
         label1 = new JLabel();
         button2 = new JButton();
+         query = new Query();
+        tableHeader =query.statrpartRecord();
+        columnNames = new String[] { "零件id", "零件名字", "规格", "价格","现存数量","所属库房"};
+        model = new DefaultTableModel(tableHeader,columnNames){
+            //设置表格全部行列都不可以编辑
+            @Override
+            public boolean isCellEditable(int row , int column){
 
+                return false;
+            }
+        };
+        JTable table = new JTable(model);
+        setVisible(true);
         //======== this ========
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
-
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setResizingAllowed(false);
         //======== panel1 ========
         {
+            contentPane.add(new JScrollPane(table),BorderLayout.CENTER);
             panel1.setMinimumSize(new Dimension(0, 50));
             panel1.setLayout(null);
 
             //---- button1 ----
             button1.setText("\u67e5\u627e");
+            button1.addActionListener(e -> button1(e));
             panel1.add(button1);
             button1.setBounds(415, 5, 90, 35);
             panel1.add(textField1);
@@ -64,6 +95,10 @@ public class PartInformation extends JFrame {
 
         //---- button2 ----
         button2.setText("\u9000\u51fa");
+        button2.addActionListener(e -> {
+			button2(e);
+			button2(e);
+		});
         contentPane.add(button2, BorderLayout.SOUTH);
         pack();
         setLocationRelativeTo(getOwner());
@@ -73,8 +108,12 @@ public class PartInformation extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel1;
     private JButton button1;
-    private JTextField textField1;
+    public JTextField textField1;
     private JLabel label1;
     private JButton button2;
+    public String [][] tableHeader;
+    String[] columnNames;
+    public DefaultTableModel model;
+    Query query;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

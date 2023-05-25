@@ -7,11 +7,12 @@ public class Query {
     String Sql;
     ResultSet rs;
     managerRecord ma;
+    partRecord pa;
     int columnCount;
     PreparedStatement preSql;
     String[][] tableHeader;
-    String [] onePart;
-
+    String [] oneManager;
+    ArrayList< partRecord> part;
     ArrayList<managerRecord> manager;      //管理员信息储存的集合
     Connection con = JDBC.connectdb("ware", "root", "");
     //登录信息
@@ -59,7 +60,11 @@ public class Query {
                 ma = new managerRecord();
                 ma.setId(rs.getInt(1));
                 ma.setName(rs.getString(2));
-                ma.setSex(rs.getString(3));
+                if(rs.getString(3).equals("m")){
+                    ma.setSex("男");
+                }else{
+                    ma.setSex("女");
+                }
                 ma.setAge(rs.getInt(4));
                 ma.setPhone(rs.getString(5));
                 ma.setSalary(rs.getDouble(6));
@@ -235,5 +240,123 @@ public class Query {
         }
 
 
+    }
+    //显示个人信息
+    public String [] revealPerson(String x ){
+        Sql="select * from manager where account=?";
+        try {
+            preSql = con.prepareStatement(Sql);
+            preSql.setString(1,x);
+            rs= preSql.executeQuery();
+            ResultSetMetaData metadata = rs.getMetaData();// 获得元数据的数据集对象
+            columnCount = metadata.getColumnCount();
+            while (rs.next()) {
+                oneManager = new String[columnCount];
+                oneManager[0]=String.valueOf(rs.getInt(1));
+                oneManager[1]=rs.getString(2);
+                if(rs.getString(3).equals("m")){
+                    oneManager[2]="男";
+                }else{
+                    oneManager[2]="女";
+                }
+                oneManager[3]=String.valueOf(rs.getInt(4));
+                oneManager[4]=rs.getString(5);
+                oneManager[5]=String.valueOf(rs.getDouble(6));
+                oneManager[6]=String.valueOf(rs.getInt(7));
+                oneManager[7]= rs.getString(8);
+                oneManager[8]=rs.getString(9);
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return oneManager;
+    }
+    //搜索零件信息
+    public String[][] statrpartRecord(){
+        Sql="select * from part";
+        try {
+            preSql=con.prepareStatement(Sql);
+            rs= preSql.executeQuery();
+            ResultSetMetaData metadata = rs.getMetaData();// 获得元数据的数据集对象
+            columnCount = metadata.getColumnCount();
+            part=new ArrayList<>();
+            while (rs.next()) {
+                pa = new partRecord();
+                pa.setPartID(rs.getInt(1));
+                pa.setPartName(rs.getString(2));
+                pa.setSpecs(rs.getString(3));
+                pa.setPrice(rs.getDouble(4));
+                pa.setAmount(rs.getInt(5));
+                pa.setWarehouseID(rs.getInt(6));
+                part.add(pa);
+            }
+            tableHeader = new String[part.size()][columnCount];
+            for (int i = 0; i < part.size(); i++) {
+                pa = part.get(i);
+                for (int j = 0; j < columnCount; j++) {
+                    if (j == 0) {
+                        tableHeader[i][j] = String.valueOf(pa.getPartID());
+                    } else if (j == 1) {
+                        tableHeader[i][j] = pa.getPartName();
+                    } else if (j == 2) {
+                        tableHeader[i][j] = pa.getSpecs();
+                    } else if (j == 3) {
+                        tableHeader[i][j] = String.valueOf(pa.getPrice());
+                    } else if (j == 4) {
+                        tableHeader[i][j] = String.valueOf(pa.getAmount());
+                    }else {
+                        tableHeader[i][j] = String.valueOf(pa.getWarehouseID());
+                    }
+                }
+            }con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tableHeader;
+    }
+    //寻找某个零件
+    public String[][] findpartRecord(String x ){
+        Sql="select * from part where pname=?";
+        try {
+            preSql=con.prepareStatement(Sql);
+            preSql.setString(1,x);
+            rs= preSql.executeQuery();
+            ResultSetMetaData metadata = rs.getMetaData();// 获得元数据的数据集对象
+            columnCount = metadata.getColumnCount();
+            part=new ArrayList<>();
+            while (rs.next()) {
+                pa = new partRecord();
+                pa.setPartID(rs.getInt(1));
+                pa.setPartName(rs.getString(2));
+                pa.setSpecs(rs.getString(3));
+                pa.setPrice(rs.getDouble(4));
+                pa.setAmount(rs.getInt(5));
+                pa.setWarehouseID(rs.getInt(6));
+                part.add(pa);
+            }
+            tableHeader = new String[part.size()][columnCount];
+            for (int i = 0; i < part.size(); i++) {
+                pa = part.get(i);
+                for (int j = 0; j < columnCount; j++) {
+                    if (j == 0) {
+                        tableHeader[i][j] = String.valueOf(pa.getPartID());
+                    } else if (j == 1) {
+                        tableHeader[i][j] = pa.getPartName();
+                    } else if (j == 2) {
+                        tableHeader[i][j] = pa.getSpecs();
+                    } else if (j == 3) {
+                        tableHeader[i][j] = String.valueOf(pa.getPrice());
+                    } else if (j == 4) {
+                        tableHeader[i][j] = String.valueOf(pa.getAmount());
+                    }else {
+                        tableHeader[i][j] = String.valueOf(pa.getWarehouseID());
+                    }
+                }
+            }con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tableHeader;
     }
 }

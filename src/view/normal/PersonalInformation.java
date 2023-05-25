@@ -4,6 +4,7 @@
 
 package view.normal;
 
+import action.personInformationAction;
 import base.managerRecord;
 
 import java.awt.*;
@@ -18,10 +19,14 @@ public class PersonalInformation extends JFrame {
     managerRecord ma;
     public PersonalInformation(managerRecord ma) {
 
-        this.ma = ma;
+        this.ma = ma;;
         initComponents();
+        display();
     }
-
+public void display(){
+    personInformationAction pe = new personInformationAction(ma,this);
+    pe.reveal();
+}
 
 
     private void initComponents() {
@@ -47,7 +52,12 @@ public class PersonalInformation extends JFrame {
         panel7 = new JPanel();
         label10 = new JLabel();
         label17 = new JLabel();
+        panel9 = new JPanel();
+        label18 = new JLabel();
+        label19 = new JLabel();
         panel8 = new JPanel();
+        label20 = new JLabel();
+        label21 = new JLabel();
 
         //======== this ========
         setVisible(true);
@@ -134,24 +144,25 @@ public class PersonalInformation extends JFrame {
         }
         contentPane.add(panel7);
 
+        //======== panel9 ========
+        {
+            panel9.setLayout(new BorderLayout());
+
+            //---- label18 ----
+            label18.setText("\u8d26\u53f7\uff1a");
+            panel9.add(label18, BorderLayout.WEST);
+            panel9.add(label19, BorderLayout.CENTER);
+        }
+        contentPane.add(panel9);
+
         //======== panel8 ========
         {
-            panel8.setLayout(null);
+            panel8.setLayout(new BorderLayout());
 
-            {
-                // compute preferred size
-                Dimension preferredSize = new Dimension();
-                for(int i = 0; i < panel8.getComponentCount(); i++) {
-                    Rectangle bounds = panel8.getComponent(i).getBounds();
-                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                }
-                Insets insets = panel8.getInsets();
-                preferredSize.width += insets.right;
-                preferredSize.height += insets.bottom;
-                panel8.setMinimumSize(preferredSize);
-                panel8.setPreferredSize(preferredSize);
-            }
+            //---- label20 ----
+            label20.setText("\u5bc6\u7801\uff1a");
+            panel8.add(label20, BorderLayout.WEST);
+            panel8.add(label21, BorderLayout.CENTER);
         }
         contentPane.add(panel8);
         pack();
@@ -162,25 +173,30 @@ public class PersonalInformation extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel1;
     private JLabel label5;
-    private JLabel label11;
+    public JLabel label11;
     private JPanel panel2;
     private JLabel label4;
-    private JLabel label12;
+    public JLabel label12;
     private JPanel panel3;
     private JLabel label6;
-    private JLabel label13;
+    public JLabel label13;
     private JPanel panel4;
     private JLabel label7;
-    private JLabel label14;
+    public JLabel label14;
     private JPanel panel5;
     private JLabel label8;
-    private JLabel label15;
+    public JLabel label15;
     private JPanel panel6;
     private JLabel label9;
-    private JLabel label16;
+    public JLabel label16;
     private JPanel panel7;
     private JLabel label10;
-    private JLabel label17;
+    public JLabel label17;
+    private JPanel panel9;
+    private JLabel label18;
+    public JLabel label19;
     private JPanel panel8;
+    private JLabel label20;
+    public JLabel label21;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
