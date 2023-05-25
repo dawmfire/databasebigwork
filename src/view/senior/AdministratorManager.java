@@ -4,9 +4,13 @@
 
 package view.senior;
 
+import action.administratorFindAction;
+import base.Query;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author unknown
@@ -19,10 +23,29 @@ public class AdministratorManager extends JFrame {
     public JPanel getPanel1() {
         return panel1;
     }
+//查找功能
 
     private void button2(ActionEvent e) {
         // TODO add your code here
-        textField1.setText("111");
+        administratorFindAction ad= new administratorFindAction(textField1.getText(),this);
+        ad.actionPerformed();
+    }
+//删除功能
+    private void button4(ActionEvent e) {
+        // TODO add your code here
+            new deleteChange();
+    }
+//更新功能
+    private void button3(ActionEvent e) {
+        // TODO add your code here
+        new updatePerson("更新");
+    }
+//添加功能
+    private void button1(ActionEvent e) {
+        // TODO add your code here
+       new updatePerson("添加");
+
+
     }
 
     private void initComponents() {
@@ -36,15 +59,27 @@ public class AdministratorManager extends JFrame {
         button1 = new JButton();
         button3 = new JButton();
         button4 = new JButton();
+        query = new Query();
+        tableHeader =query.statrSeniorManagerRecordQuery();
+        columnNames = new String[] { "管理员id", "管理员名字", "性别", "年龄", "电话", "工资", "所属库房id", "账号","密码"};
+        model = new DefaultTableModel(tableHeader,columnNames){
+            //设置表格全部行列都不可以编辑
+            @Override
+            public boolean isCellEditable(int row , int column){
 
+                return false;
+            }
+        };
+        JTable table = new JTable(model);
         //======== this ========
         var contentPane = getContentPane();
         contentPane.setLayout(null);
-
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setResizingAllowed(false);
         //======== panel1 ========
         {
             panel1.setLayout(new BorderLayout());
-
+            panel1.add(new JScrollPane(table),BorderLayout.CENTER);
             //======== panel2 ========
             {
                 panel2.setPreferredSize(new Dimension(523, 50));
@@ -92,14 +127,17 @@ public class AdministratorManager extends JFrame {
 
                 //---- button1 ----
                 button1.setText("\u6dfb\u52a0");
+                button1.addActionListener(e -> button1(e));
                 panel3.add(button1);
 
                 //---- button3 ----
                 button3.setText("\u66f4\u65b0");
+                button3.addActionListener(e -> button3(e));
                 panel3.add(button3);
 
                 //---- button4 ----
                 button4.setText("\u5220\u9664");
+                button4.addActionListener(e -> button4(e));
                 panel3.add(button4);
             }
             panel1.add(panel3, BorderLayout.SOUTH);
@@ -136,5 +174,9 @@ public class AdministratorManager extends JFrame {
     private JButton button1;
     private JButton button3;
     private JButton button4;
+    public String [][] tableHeader;
+    String[] columnNames;
+    public DefaultTableModel model;
+    Query query;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

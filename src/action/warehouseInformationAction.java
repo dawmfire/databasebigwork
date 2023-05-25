@@ -17,7 +17,7 @@ public class warehouseInformationAction {
         Query qe = new Query();
         tableHeader=qe.findwarehouseRecord(widname);
         if (!widname.equals("")) {
-            for (int i = 0; i<warehouse.tableHeader.length; i++) {
+            for (int i = 0; i!=warehouse.model.getRowCount(); ) {
                 warehouse.model.removeRow(0);
             }
             System.out.println(tableHeader.length);

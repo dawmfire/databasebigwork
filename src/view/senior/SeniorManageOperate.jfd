@@ -15,6 +15,8 @@ new FormModel {
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 					name: "panel1"
 					addEvent( new FormEvent( "javax.swing.event.AncestorListener", "ancestorAdded", "panel1AncestorAdded", true ) )
+					addEvent( new FormEvent( "java.beans.PropertyChangeListener", "propertyChange", "panel1PropertyChange", true ) )
+					addEvent( new FormEvent( "java.beans.PropertyChangeListener", "propertyChange", "panel1PropertyChange", true ) )
 				}, new FormLayoutConstraints( null ) {
 					"title": "管理员信息"
 				} )

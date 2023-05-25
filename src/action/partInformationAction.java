@@ -16,10 +16,9 @@ public class partInformationAction {
         Query qe =new Query();
         tableHeader=qe.findpartRecord(pname);
         if (!pname.equals("")) {
-            for (int i = 0; i<partInformation.tableHeader.length; i++) {
+            for (int i = 0; i!=partInformation.model.getRowCount(); ) {
                 partInformation.model.removeRow(0);
             }
-            System.out.println(tableHeader.length);
             for (int i = 0; i < tableHeader.length; i++) {
 
                 if (tableHeader[i][1].equals(pname)) {

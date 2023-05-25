@@ -4,19 +4,36 @@
 
 package view.senior;
 
+import action.addOrupdateManager;
+
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 /**
  * @author unknown
  */
 public class updatePerson extends JFrame {
+    String operate;
     public updatePerson() {
         initComponents();
     }
 
+    public updatePerson(String operate) {
+        this.operate = operate;
+        initComponents();
+    }
+
+    private void button1(ActionEvent e) {
+        // TODO add your code here
+        new addOrupdateManager(this,operate);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        panel10 = new JPanel();
+        label9 = new JLabel();
+        textField9 = new JTextField();
         panel1 = new JPanel();
         label1 = new JLabel();
         textField1 = new JTextField();
@@ -45,8 +62,20 @@ public class updatePerson extends JFrame {
         button1 = new JButton();
 
         //======== this ========
+        setVisible(true);
         var contentPane = getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+
+        //======== panel10 ========
+        {
+            panel10.setLayout(new BoxLayout(panel10, BoxLayout.X_AXIS));
+
+            //---- label9 ----
+            label9.setText("\u5de5\u53f7\uff1a");
+            panel10.add(label9);
+            panel10.add(textField9);
+        }
+        contentPane.add(panel10);
 
         //======== panel1 ========
         {
@@ -142,6 +171,7 @@ public class updatePerson extends JFrame {
 
             //---- button1 ----
             button1.setText("\u786e\u8ba4");
+            button1.addActionListener(e -> button1(e));
             panel7.add(button1);
         }
         contentPane.add(panel7);
@@ -151,30 +181,33 @@ public class updatePerson extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JPanel panel10;
+    private JLabel label9;
+    public JTextField textField9;
     private JPanel panel1;
     private JLabel label1;
-    private JTextField textField1;
+    public JTextField textField1;
     private JPanel panel2;
     private JLabel label2;
-    private JTextField textField6;
+    public JTextField textField6;
     private JPanel panel3;
     private JLabel label3;
-    private JTextField textField5;
+    public JTextField textField5;
     private JPanel panel4;
     private JLabel label4;
-    private JTextField textField4;
+    public JTextField textField4;
     private JPanel panel5;
     private JLabel label5;
-    private JTextField textField3;
+    public JTextField textField3;
     private JPanel panel6;
     private JLabel label6;
-    private JTextField textField2;
+    public JTextField textField2;
     private JPanel panel8;
     private JLabel label7;
-    private JTextField textField7;
+    public JTextField textField7;
     private JPanel panel9;
     private JLabel label8;
-    private JTextField textField8;
+    public JTextField textField8;
     private JPanel panel7;
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

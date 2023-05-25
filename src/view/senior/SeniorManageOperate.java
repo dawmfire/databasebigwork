@@ -5,6 +5,7 @@
 package view.senior;
 
 import java.awt.*;
+import java.beans.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
@@ -17,30 +18,31 @@ public class SeniorManageOperate extends JFrame {
         initComponents();
     }
 
+    //  管理员界面响应
     private void panel4AncestorAdded(AncestorEvent e) {
         PartInformationManager part=new PartInformationManager();
         panel4.add(part.getPanel1());
     }
     
-
+        //  管理员界面响应
     private void panel1AncestorAdded(AncestorEvent e) {
         // TODO add your code here
         AdministratorManager ad = new AdministratorManager();
         panel1.add(ad.getPanel1());
     }
-
+    //  管理员界面响应
     private void panel2AncestorAdded(AncestorEvent e) {
         WarehouseInformationManager ware = new WarehouseInformationManager();
         panel2.add(ware.getPanel1());
         // TODO add your code here
     }
-
+    //  管理员界面响应
     private void panel3AncestorAdded(AncestorEvent e) {
         // TODO add your code here
         InOutBoundRecords record = new InOutBoundRecords();
         panel3.add(record.getPanel1());
     }
-
+    //  管理员界面响应
     private void panel5AncestorAdded(AncestorEvent e) {
         // TODO add your code here
         PersonalInformationManager personal = new PersonalInformationManager();
