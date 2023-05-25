@@ -8,11 +8,13 @@ public class Query {
     ResultSet rs;
     managerRecord ma;
     partRecord pa;
+    warehouseRecord wa;
     int columnCount;
     PreparedStatement preSql;
     String[][] tableHeader;
     String [] oneManager;
-    ArrayList< partRecord> part;
+    ArrayList< warehouseRecord> ware;    // 库房信息的集合
+    ArrayList< partRecord> part;  //零件信息的集合
     ArrayList<managerRecord> manager;      //管理员信息储存的集合
     Connection con = JDBC.connectdb("ware", "root", "");
     //登录信息
@@ -351,6 +353,100 @@ public class Query {
                         tableHeader[i][j] = String.valueOf(pa.getAmount());
                     }else {
                         tableHeader[i][j] = String.valueOf(pa.getWarehouseID());
+                    }
+                }
+            }con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tableHeader;
+    }
+    //搜索库房信息
+    public String[][]  startwarehouseRecords(){
+
+        Sql="select * from warefind";
+        try {
+            preSql=con.prepareStatement(Sql);
+            rs= preSql.executeQuery();
+            ResultSetMetaData metadata = rs.getMetaData();// 获得元数据的数据集对象
+            columnCount = metadata.getColumnCount();
+            ware=new ArrayList<>();
+            while (rs.next()) {
+                wa = new warehouseRecord();
+                wa.setWarehouseID(rs.getInt(1));
+                wa.setWarehouseName(rs.getString(2));
+                wa.setAddress(rs.getString(3));
+                wa.setArea(rs.getDouble(4));
+                wa.setManagermunber(rs.getInt(5));
+                wa.setNumber(rs.getInt(6));
+                wa.setCapamount(rs.getInt(7));
+                ware.add(wa);
+            }
+            tableHeader = new String[ware.size()][columnCount];
+            for (int i = 0; i < ware.size(); i++) {
+                wa = ware.get(i);
+                for (int j = 0; j < columnCount; j++) {
+                    if (j == 0) {
+                        tableHeader[i][j] = String.valueOf(wa.getWarehouseID());
+                    } else if (j == 1) {
+                        tableHeader[i][j] = wa.getWarehouseName();
+                    } else if (j == 2) {
+                        tableHeader[i][j] = wa.getAddress();
+                    } else if (j == 3){
+                        tableHeader[i][j] = String.valueOf(wa.getArea());
+                    } else if (j == 4){
+                        tableHeader[i][j] = String.valueOf(wa.getManagermunber());
+                    } else if (j == 5){
+                        tableHeader[i][j] = String.valueOf(wa.getNumber());
+                    } else {
+                        tableHeader[i][j] = String.valueOf(wa.getCapamount());
+                    }
+                }
+            }con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tableHeader;
+    }
+    //查找库房信息
+    public String[][] findwarehouseRecord(String x ){
+        Sql="select * from warefind where widname=?";
+        try {
+            preSql=con.prepareStatement(Sql);
+            preSql.setString(1,x);
+            rs= preSql.executeQuery();
+            ResultSetMetaData metadata = rs.getMetaData();// 获得元数据的数据集对象
+            columnCount = metadata.getColumnCount();
+            ware=new ArrayList<>();
+            while (rs.next()) {
+                wa = new warehouseRecord();
+                wa.setWarehouseID(rs.getInt(1));
+                wa.setWarehouseName(rs.getString(2));
+                wa.setAddress(rs.getString(3));
+                wa.setArea(rs.getDouble(4));
+                wa.setManagermunber(rs.getInt(5));
+                wa.setNumber(rs.getInt(6));
+                wa.setCapamount(rs.getInt(7));
+                ware.add(wa);
+            }
+            tableHeader = new String[ware.size()][columnCount];
+            for (int i = 0; i < ware.size(); i++) {
+                wa = ware.get(i);
+                for (int j = 0; j < columnCount; j++) {
+                    if (j == 0) {
+                        tableHeader[i][j] = String.valueOf(wa.getWarehouseID());
+                    } else if (j == 1) {
+                        tableHeader[i][j] = wa.getWarehouseName();
+                    } else if (j == 2) {
+                        tableHeader[i][j] = wa.getAddress();
+                    } else if (j == 3){
+                        tableHeader[i][j] = String.valueOf(wa.getArea());
+                    } else if (j == 4){
+                        tableHeader[i][j] = String.valueOf(wa.getManagermunber());
+                    } else if (j == 5){
+                        tableHeader[i][j] = String.valueOf(wa.getNumber());
+                    } else {
+                        tableHeader[i][j] = String.valueOf(wa.getCapamount());
                     }
                 }
             }con.close();
