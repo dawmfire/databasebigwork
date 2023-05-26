@@ -262,7 +262,7 @@ public class Query {
         return tableHeader;
     }
 
-    //寻找某零件库存情况(用于出入库）
+    //寻找某零件库存情况(用于出入库，更新零件信息）
     public storePartRecord findOnePart(String x) {
         storePartRecord storepart = new storePartRecord();
         Sql = "SELECT * from partinout where pname=?";
@@ -486,10 +486,18 @@ public class Query {
 
     //查找库房信息
     public String[][] findwarehouseRecord(String x) {
-        Sql = "select * from warefind where widname=?";
         try {
-            preSql = con.prepareStatement(Sql);
-            preSql.setString(1, x);
+            if (!x.matches("[0-9]{1,}")) {
+                Sql = "select * from warefind where widname=?";
+                preSql = con.prepareStatement(Sql);
+                preSql.setString(1, x);
+            } else {
+                Sql = "select * from warefind where Wid=?";
+                preSql = con.prepareStatement(Sql);
+                preSql.setInt(1, Integer.valueOf(x));
+            }
+
+
             rs = preSql.executeQuery();
             ResultSetMetaData metadata = rs.getMetaData();// 获得元数据的数据集对象
             columnCount = metadata.getColumnCount();
@@ -600,15 +608,98 @@ public class Query {
     }
 
     //添加更新零件
-    public void updateaddPart() {
-
+    public void updateaddPart(String operate, partRecord part) {
+        if(operate.equals("添加")){
+            Sql="insert into part(pname,specs,price,amount,Wid) vules(?,?,?,?,?)";
+            try {
+                preSql = con.prepareStatement(Sql);
+                preSql.setString(1,part.getPartName());
+                preSql.setString(2,part.getSpecs());
+                preSql.setDouble(3,part.getPrice());
+                preSql.setInt(4,part.getAmount());
+                preSql.setInt(5,part.getWarehouseID());
+                int ok = preSql.executeUpdate();
+                Sql="select Pid from part where panme=?";  // 找新插入的零件id
+                preSql = con.prepareStatement(Sql);
+                preSql.setString(1,part.getPartName());
+                rs=preSql.executeQuery();
+                Sql="DELETE FROM store WHERE Pid is NULL AND Wid=?";
+                preSql = con.prepareStatement(Sql);
+                preSql.setInt(1,part.getWarehouseID());
+                ok = preSql.executeUpdate();
+                preSql.setInt(1,part.getWarehouseID());
+                Sql="insert into store(Wid,Pid,number) values(?,?,?)";
+                preSql = con.prepareStatement(Sql);
+                preSql.setInt(1,part.getWarehouseID());
+                preSql.setInt(1,rs.getInt(1));
+                preSql.setInt(1,part.getWareAmount());
+                ok = preSql.executeUpdate();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else{
+            Sql="update part set pname=?,specs=?,price=?,amount=? where Pid=(select Pid from part where pname =?)";
+            try {
+                preSql = con.prepareStatement(Sql);
+                preSql.setString(1,part.getPartName());
+                preSql.setString(2,part.getSpecs());
+                preSql.setDouble(3,part.getPrice());
+                preSql.setInt(4,part.getAmount());
+                preSql.setString(5,part.getPartName());
+                int ok = preSql.executeUpdate();
+                Sql="update store set number=?where Wid=(select Wid from part where pname =?)";
+                preSql = con.prepareStatement(Sql);
+                preSql.setInt(1,part.getWareAmount());
+                preSql.setString(2,part.getPartName());
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     //添加更新库房
-    public void updateaddWarehouse() {
+    public void updateaddWarehouse(warehouseRecord wa, String operate) {
+        if(operate.equals("添加")){
+            Sql="insert into warehouse(widname,address,area) values(?,?,?)";
+            try {
+                preSql = con.prepareStatement(Sql);
+                preSql.setString(1,wa.getWarehouseName());
+                preSql.setString(2,wa.getAddress());
+                preSql.setDouble(3,wa.getArea());
+                preSql.executeUpdate();
+                Sql="select Wid from warehouse where widname=?";
+                preSql = con.prepareStatement(Sql);
+                preSql.setString(1,wa.getWarehouseName());
+                rs=preSql.executeQuery();
+                Sql="insert into store (Wid) values (?)";
+                preSql = con.prepareStatement(Sql);
+                preSql.setString(1, rs.getString(1));
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
+        }else{
+            Sql="update warehouse set widname=?,address=?,area=? where Wid=(select max(Mid) from warehouse)";
+            try {
+                preSql = con.prepareStatement(Sql);
+                preSql.setString(1,wa.getWarehouseName());
+                preSql.setString(2,wa.getAddress());
+                preSql.setDouble(3,wa.getArea());
+                preSql.executeUpdate();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+
+        }
     }
 
     //出入库记录
+    public void inoutlookRecord(String operater ){
 
+    }
 }

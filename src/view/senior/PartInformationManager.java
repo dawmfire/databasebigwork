@@ -27,12 +27,12 @@ public class PartInformationManager extends JFrame {
     //添加
     private void button2(ActionEvent e) {
         // TODO add your code here
-        new updatePart();
+        new updatePart("添加");
     }
     //更改
     private void button3(ActionEvent e) {
         // TODO add your code here
-        new updatePart();
+        new updatePart("更新");
     }
     //删除
     private void button4(ActionEvent e) {
@@ -42,8 +42,8 @@ public class PartInformationManager extends JFrame {
     //查找
     private void button1(ActionEvent e) {
         // TODO add your code here
-        partInformationFindAction pa= new partInformationFindAction(this,textField1.getText());
-        pa.findpartManagerRecord();
+        new partInformationFindAction(this,textField1.getText());
+
     }
 
     private void initComponents() {

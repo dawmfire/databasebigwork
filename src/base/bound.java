@@ -7,9 +7,9 @@ public class bound {
     private String time;        //记录时间
     private String partName;    // 零件名字
     private String managerName; //管理员名字
-
-    private int boundID;
-    private int partAmount;
+    private int inoutpartamount; //出入库零件数量（记录显示所用）
+    private int boundID;//记录id
+    private int partAmount;  //出入库零件数量（用于出入所用）
 
     public int getManagerID() {
         return managerID;
@@ -67,5 +67,11 @@ public class bound {
         this.partAmount = partAmount;
     }
 
+    public int getInoutpartamount() {
+        return inoutpartamount;
+    }
 
+    public void setInoutpartamount(int inoutpartamount) {
+        this.inoutpartamount = inoutpartamount;
+    }
 }

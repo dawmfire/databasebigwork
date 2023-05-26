@@ -23,7 +23,6 @@ public class WarehouseInformation extends JFrame {
     private void button1(ActionEvent e) {
         // TODO add your code here
         warehouseInformationAction wa =new warehouseInformationAction(this);
-        wa.warefindRecord();
     }
 
     private void initComponents() {

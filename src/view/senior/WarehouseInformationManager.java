@@ -4,6 +4,7 @@
 
 package view.senior;
 
+import action.warehouseInformationAction;
 import base.Query;
 
 import java.awt.*;
@@ -22,21 +23,25 @@ public class WarehouseInformationManager extends JFrame {
     public JPanel getPanel1() {
         return panel1;
     }
-
+    //添加
     private void button2(ActionEvent e) {
         // TODO add your code here
+        new updateWarehouse("添加");
     }
-
+    //更新
     private void button3(ActionEvent e) {
         // TODO add your code here
+        new updateWarehouse("更新");
     }
-
+    //删除
     private void button4(ActionEvent e) {
         // TODO add your code here
+        new deleteChange("库房");
     }
-
+    //查找
     private void button1(ActionEvent e) {
         // TODO add your code here
+       new warehouseInformationAction(this);
     }
 
     private void initComponents() {
@@ -50,13 +55,28 @@ public class WarehouseInformationManager extends JFrame {
         button2 = new JButton();
         button3 = new JButton();
         button4 = new JButton();
+        query=new Query();
+        tableHeader =query.startwarehouseRecords();
+        columnNames = new String[] { "库房id", "库房名字", "库房地址", "库房面积","管理人数"
+                ,"剩余库存","上限库存"};
+        model = new DefaultTableModel(tableHeader,columnNames){
+            //设置表格全部行列都不可以编辑
+            @Override
+            public boolean isCellEditable(int row , int column){
 
+                return false;
+            }
+        };
+        JTable table = new JTable(model);
         //======== this ========
         var contentPane = getContentPane();
         contentPane.setLayout(null);
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setResizingAllowed(false);
 
         //======== panel1 ========
         {
+            contentPane.add(new JScrollPane(table),BorderLayout.CENTER);
             panel1.setLayout(new BorderLayout());
 
             //======== panel2 ========
@@ -143,12 +163,15 @@ public class WarehouseInformationManager extends JFrame {
     private JPanel panel1;
     private JPanel panel2;
     private JButton button1;
-    private JTextField textField1;
+    public JTextField textField1;
     private JLabel label1;
     private JPanel panel3;
     private JButton button2;
     private JButton button3;
     private JButton button4;
-
+    public String [][] tableHeader;
+    String[] columnNames;
+    public DefaultTableModel model;
+    Query query;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

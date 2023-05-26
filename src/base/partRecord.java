@@ -7,7 +7,8 @@ public class partRecord {
     private double price;   // 零件价格
     private int amount; // 零件数量
     private int warehouseID; //库房id
-
+    private int wareAmount; // 库房剩余量
+    public partRecord(){}
     public int getPartID() {
         return partID;
     }
@@ -56,5 +57,11 @@ public class partRecord {
         this.warehouseID = warehouseID;
     }
 
+    public int getWareAmount() {
+        return wareAmount;
+    }
 
+    public void setWareAmount(int wareAmount) {
+        this.wareAmount = wareAmount;
+    }
 }

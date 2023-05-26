@@ -2,23 +2,41 @@ package action;
 
 import base.Query;
 import view.normal.WarehouseInformation;
+import view.senior.WarehouseInformationManager;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class warehouseInformationAction {
     WarehouseInformation warehouse;
     String widname;
     String [][] tableHeader;
+    Query qe = new Query();
+    DefaultTableModel model;
+    WarehouseInformationManager warehouseInformationManager;
     public warehouseInformationAction(WarehouseInformation warehouse) {
+
         this.warehouse = warehouse;
-    }
-    public  void  warefindRecord(){
         widname=warehouse.textField1.getText();
-        Query qe = new Query();
         tableHeader=qe.findwarehouseRecord(widname);
+        model=warehouse.model;
+        warefindRecord();
+
+    }
+
+    public warehouseInformationAction(WarehouseInformationManager warehouseInformationManager) {
+
+        this.warehouseInformationManager = warehouseInformationManager;
+        widname=warehouseInformationManager.textField1.getText();
+        tableHeader=qe.findwarehouseRecord(widname);
+        model=warehouseInformationManager.model;
+        warefindRecord();
+    }
+
+    public  void  warefindRecord(){
         if (!widname.equals("")) {
-            for (int i = 0; i!=warehouse.model.getRowCount(); ) {
-                warehouse.model.removeRow(0);
+            for (int i = 0; i!=model.getRowCount(); ) {
+                model.removeRow(0);
             }
             System.out.println(tableHeader.length);
             for (int i = 0; i < tableHeader.length; i++) {
@@ -28,7 +46,7 @@ public class warehouseInformationAction {
                     for (int j = 0; j < tableHeader[i].length; j++) {
                         a[j] = tableHeader[i][j];
                     }
-                    warehouse.model.addRow(a);
+                    model.addRow(a);
                 }
             }
         }else{

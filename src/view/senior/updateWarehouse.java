@@ -4,6 +4,9 @@
 
 package view.senior;
 
+import action.addOrupdateManager;
+import action.addOrupdateWarehouse;
+
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -11,12 +14,18 @@ import javax.swing.*;
  * @author unknown
  */
 public class updateWarehouse extends JFrame {
+    String operate;
     public updateWarehouse() {
         initComponents();
     }
 
+    public updateWarehouse(String operate){
+        this.operate = operate;
+        initComponents();
+    }
     private void button1(ActionEvent e) {
         // TODO add your code here
+        new addOrupdateWarehouse(this,operate);
     }
 
     private void initComponents() {
@@ -102,16 +111,16 @@ public class updateWarehouse extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel4;
     private JLabel label4;
-    private JTextField textField4;
+    public JTextField textField4;
     private JPanel panel6;
     private JLabel label6;
-    private JTextField textField2;
+    public JTextField textField2;
     private JPanel panel2;
     private JLabel label2;
-    private JTextField textField6;
+    public JTextField textField6;
     private JPanel panel5;
     private JLabel label5;
-    private JTextField textField3;
+    public JTextField textField3;
     private JPanel panel7;
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
