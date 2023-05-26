@@ -9,9 +9,11 @@ public class deleteAction {
     public deleteAction(deleteChange deleteChange, String choose) {
     this.choose=choose;
     this.deleteChange=deleteChange;
+        startDelete();
     }
     public void startDelete(){
         Query qe= new Query();
+
         qe.deleteInformation(deleteChange.textField1.getText(),choose);
 
 

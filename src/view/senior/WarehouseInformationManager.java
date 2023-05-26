@@ -4,8 +4,12 @@
 
 package view.senior;
 
+import base.Query;
+
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author unknown
@@ -17,6 +21,22 @@ public class WarehouseInformationManager extends JFrame {
 
     public JPanel getPanel1() {
         return panel1;
+    }
+
+    private void button2(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void button3(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void button4(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void button1(ActionEvent e) {
+        // TODO add your code here
     }
 
     private void initComponents() {
@@ -46,6 +66,7 @@ public class WarehouseInformationManager extends JFrame {
 
                 //---- button1 ----
                 button1.setText("\u67e5\u627e");
+                button1.addActionListener(e -> button1(e));
                 panel2.add(button1);
                 button1.setBounds(new Rectangle(new Point(470, 5), button1.getPreferredSize()));
                 panel2.add(textField1);
@@ -81,14 +102,17 @@ public class WarehouseInformationManager extends JFrame {
 
                 //---- button2 ----
                 button2.setText("\u6dfb\u52a0");
+                button2.addActionListener(e -> button2(e));
                 panel3.add(button2);
 
                 //---- button3 ----
                 button3.setText("\u66f4\u65b0");
+                button3.addActionListener(e -> button3(e));
                 panel3.add(button3);
 
                 //---- button4 ----
                 button4.setText("\u5220\u9664");
+                button4.addActionListener(e -> button4(e));
                 panel3.add(button4);
             }
             panel1.add(panel3, BorderLayout.SOUTH);
@@ -125,5 +149,6 @@ public class WarehouseInformationManager extends JFrame {
     private JButton button2;
     private JButton button3;
     private JButton button4;
+
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

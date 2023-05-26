@@ -4,7 +4,7 @@
 
 package view.normal;
 
-import action.partInformationAction;
+import action.partInformationFindAction;
 import base.Query;
 
 import java.awt.*;
@@ -27,7 +27,7 @@ public class PartInformation extends JFrame {
     //以零件名为条件
     private void button1(ActionEvent e) {
         // TODO add your code here
-        partInformationAction pa= new partInformationAction(this,textField1.getText());
+        partInformationFindAction pa= new partInformationFindAction(this,textField1.getText());
         pa.findpartRecord();
     }
 

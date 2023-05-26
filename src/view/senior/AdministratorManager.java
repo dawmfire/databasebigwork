@@ -27,7 +27,7 @@ public class AdministratorManager extends JFrame {
 
     private void button2(ActionEvent e) {
         // TODO add your code here
-        administratorFindAction ad= new administratorFindAction(textField1.getText(),this);
+        administratorFindAction ad= new administratorFindAction(textField1.getText(),this,"高级");
         ad.actionPerformed();
     }
 //删除功能

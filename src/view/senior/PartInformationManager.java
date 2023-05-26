@@ -4,19 +4,46 @@
 
 package view.senior;
 
+import action.partInformationFindAction;
+import base.Query;
+
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author unknown
  */
 public class PartInformationManager extends JFrame {
     public PartInformationManager() {
+
         initComponents();
     }
 
     public JPanel getPanel1() {
         return panel1;
+    }
+    //添加
+    private void button2(ActionEvent e) {
+        // TODO add your code here
+        new updatePart();
+    }
+    //更改
+    private void button3(ActionEvent e) {
+        // TODO add your code here
+        new updatePart();
+    }
+    //删除
+    private void button4(ActionEvent e) {
+        // TODO add your code here
+        new deleteChange("零件");
+    }
+    //查找
+    private void button1(ActionEvent e) {
+        // TODO add your code here
+        partInformationFindAction pa= new partInformationFindAction(this,textField1.getText());
+        pa.findpartManagerRecord();
     }
 
     private void initComponents() {
@@ -30,15 +57,27 @@ public class PartInformationManager extends JFrame {
         button4 = new JButton();
         button3 = new JButton();
         button2 = new JButton();
+        query = new Query();
+        tableHeader =query.statrpartRecord();
+        columnNames = new String[] { "零件id", "零件名字", "规格", "价格","现存数量","所属库房"};
+        model = new DefaultTableModel(tableHeader,columnNames){
+            //设置表格全部行列都不可以编辑
+            @Override
+            public boolean isCellEditable(int row , int column){
 
+                return false;
+            }
+        };
+        JTable table = new JTable(model);
         //======== this ========
         var contentPane = getContentPane();
         contentPane.setLayout(null);
-
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setResizingAllowed(false);
         //======== panel1 ========
         {
             panel1.setLayout(new BorderLayout());
-
+            panel1.add(new JScrollPane(table),BorderLayout.CENTER);
             //======== panel2 ========
             {
                 panel2.setMinimumSize(new Dimension(0, 50));
@@ -46,6 +85,7 @@ public class PartInformationManager extends JFrame {
 
                 //---- button1 ----
                 button1.setText("\u67e5\u627e");
+                button1.addActionListener(e -> button1(e));
                 panel2.add(button1);
                 button1.setBounds(415, 5, 90, 35);
                 panel2.add(textField1);
@@ -80,16 +120,19 @@ public class PartInformationManager extends JFrame {
 
                 //---- button4 ----
                 button4.setText("\u5220\u9664");
+                button4.addActionListener(e -> button4(e));
                 panel3.add(button4);
                 button4.setBounds(new Rectangle(new Point(190, 0), button4.getPreferredSize()));
 
                 //---- button3 ----
                 button3.setText("\u4fee\u6539");
+                button3.addActionListener(e -> button3(e));
                 panel3.add(button3);
                 button3.setBounds(new Rectangle(new Point(95, 0), button3.getPreferredSize()));
 
                 //---- button2 ----
                 button2.setText("\u6dfb\u52a0");
+                button2.addActionListener(e -> button2(e));
                 panel3.add(button2);
                 button2.setBounds(new Rectangle(new Point(0, 0), button2.getPreferredSize()));
 
@@ -142,5 +185,9 @@ public class PartInformationManager extends JFrame {
     private JButton button4;
     private JButton button3;
     private JButton button2;
+    public String [][] tableHeader;
+    String[] columnNames;
+    public DefaultTableModel model;
+    Query query;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

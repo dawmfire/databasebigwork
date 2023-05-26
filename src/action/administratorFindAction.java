@@ -13,18 +13,24 @@ public class administratorFindAction {
     String [][] tableHeader;
     AdministratorManager ams;
     Query query;
-    public administratorFindAction(String x, Administrator am){
+    String y;
+    public administratorFindAction(String x, Administrator am,String y){
         this.Mid = x;
         this.am = am;
+        this.y=y;
     }
-    public administratorFindAction(String x, AdministratorManager ams){
+    public administratorFindAction(String x, AdministratorManager ams,String y){
         this.Mid = x;
         this.ams = ams;
+        this.y=y;
     }
     public void actionPerformed(){
         query =new Query();
-        tableHeader=query.statrfindSeniorMangerRecords(Mid);
-
+        if(y.equals("¸ß¼¶")) {
+            tableHeader = query.statrfindSeniorMangerRecords(Mid);
+        }else{
+            tableHeader = query.statrfindMangerRecords(Mid);
+        }
         if (!Mid.equals("")) {
             for (int i = 0; i != ams.model.getRowCount(); ) {
                 ams.model.removeRow(0);

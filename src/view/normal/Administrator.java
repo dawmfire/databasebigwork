@@ -24,7 +24,7 @@ public class Administrator extends JFrame {
     //查找功能
     private void button2(ActionEvent e) {
         // TODO add your code here
-        administratorFindAction am =new administratorFindAction(textField1.getText(),this);
+        administratorFindAction am =new administratorFindAction(textField1.getText(),this,"普通");
         am.actionPerformed();
     }
 

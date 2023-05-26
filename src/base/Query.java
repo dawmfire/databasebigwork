@@ -44,7 +44,7 @@ public class Query {
                     }
                 }
             }
-
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -262,7 +262,7 @@ public class Query {
         return tableHeader;
     }
 
-    //寻找某零件库存情况
+    //寻找某零件库存情况(用于出入库）
     public storePartRecord findOnePart(String x) {
         storePartRecord storepart = new storePartRecord();
         Sql = "SELECT * from partinout where pname=?";
@@ -535,39 +535,40 @@ public class Query {
 
 
     //高级管理员
+
     //添加更新管理员
     public void updateaddManager(String x, managerRecord ma) {
-        if (x.equals("插入")) {
-            Sql="insert into manager(name,sex,age,phone,salary,Wid,account,password) values(?,?,?,?,?,?,?,?)";
+        if (x.equals("添加")) {
+            Sql = "insert into manager(name,sex,age,phone,salary,Wid,account,password) values(?,?,?,?,?,?,?,?)";
             try {
                 preSql = con.prepareStatement(Sql);
-                preSql.setString(1,ma.getName());
-                preSql.setString(2,ma.getSex());
-                preSql.setInt(3,ma.getAge());
-                preSql.setString(4,ma.getPhone());
-                preSql.setDouble(5,ma.getSalary());
-                preSql.setInt(6,ma.getWarehouseID());
-                preSql.setString(7,ma.getAccount());
-                preSql.setString(8,ma.getPassword());
-               int ok = preSql.executeUpdate();
+                preSql.setString(1, ma.getName());
+                preSql.setString(2, ma.getSex());
+                preSql.setInt(3, ma.getAge());
+                preSql.setString(4, ma.getPhone());
+                preSql.setDouble(5, ma.getSalary());
+                preSql.setInt(6, ma.getWarehouseID());
+                preSql.setString(7, ma.getAccount());
+                preSql.setString(8, ma.getPassword());
+                int ok = preSql.executeUpdate();
                 con.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
-            Sql="update manager set name = ?, sex=?,age=?,phone=?,salary=?,Wid=?" +
+            Sql = "update manager set name = ?, sex=?,age=?,phone=?,salary=?,Wid=?" +
                     ",account=?,password=? where Mid = ?";
             try {
                 preSql = con.prepareStatement(Sql);
-                preSql.setString(1,ma.getName());
-                preSql.setString(2,ma.getSex());
-                preSql.setInt(3,ma.getAge());
-                preSql.setString(4,ma.getPhone());
-                preSql.setDouble(5,ma.getSalary());
-                preSql.setInt(6,ma.getWarehouseID());
-                preSql.setString(7,ma.getAccount());
-                preSql.setString(8,ma.getPassword());
-                preSql.setInt(9,ma.getId());
+                preSql.setString(1, ma.getName());
+                preSql.setString(2, ma.getSex());
+                preSql.setInt(3, ma.getAge());
+                preSql.setString(4, ma.getPhone());
+                preSql.setDouble(5, ma.getSalary());
+                preSql.setInt(6, ma.getWarehouseID());
+                preSql.setString(7, ma.getAccount());
+                preSql.setString(8, ma.getPassword());
+                preSql.setInt(9, ma.getId());
                 int ok = preSql.executeUpdate();
                 con.close();
             } catch (SQLException e) {
@@ -580,21 +581,34 @@ public class Query {
     }
 
     //删除功能 (库房，管理员，零件信息）
-    public void  deleteInformation(String text, String choose){
-             if(choose.equals("管理员")){
-                 Sql="delete from manager where Mid=?";
-             }else if(choose.equals("库房")){
-                 Sql="delete from warehouse where Wid=?";
-             }else{
-                 Sql="delete from part where Pid=?";
-             }
+    public void deleteInformation(String text, String choose) {
+        if (choose.equals("管理员")) {
+            Sql = "delete from manager where Mid=?";
+        } else if (choose.equals("库房")) {
+            Sql = "delete from warehouse where Wid=?";
+        } else {
+            Sql = "delete from part where Pid=?";
+        }
         try {
             preSql = con.prepareStatement(Sql);
-            preSql.setInt(1,Integer.valueOf(text));
+            preSql.setInt(1, Integer.valueOf(text));
             int ok = preSql.executeUpdate();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+    //添加更新零件
+    public void updateaddPart() {
+
+    }
+
+    //添加更新库房
+    public void updateaddWarehouse() {
+
+    }
+
+    //出入库记录
+
 }

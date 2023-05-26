@@ -4,6 +4,7 @@
 
 package view.senior;
 
+import java.awt.event.*;
 import javax.swing.*;
 
 /**
@@ -12,6 +13,10 @@ import javax.swing.*;
 public class updateWarehouse extends JFrame {
     public updateWarehouse() {
         initComponents();
+    }
+
+    private void button1(ActionEvent e) {
+        // TODO add your code here
     }
 
     private void initComponents() {
@@ -85,6 +90,7 @@ public class updateWarehouse extends JFrame {
 
             //---- button1 ----
             button1.setText("\u786e\u8ba4");
+            button1.addActionListener(e -> button1(e));
             panel7.add(button1);
         }
         contentPane.add(panel7);
