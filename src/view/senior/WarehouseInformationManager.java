@@ -76,9 +76,9 @@ public class WarehouseInformationManager extends JFrame {
 
         //======== panel1 ========
         {
-            contentPane.add(new JScrollPane(table),BorderLayout.CENTER);
-            panel1.setLayout(new BorderLayout());
 
+            panel1.setLayout(new BorderLayout());
+            panel1.add(new JScrollPane(table),BorderLayout.CENTER);
             //======== panel2 ========
             {
                 panel2.setMinimumSize(new Dimension(78, 60));

@@ -14,18 +14,19 @@ import javax.swing.*;
  */
 public class updatePart extends JFrame {
     String operate;
+
     public updatePart() {
         initComponents();
     }
 
-    public updatePart(String operate){
+    public updatePart(String operate) {
         this.operate = operate;
         initComponents();
     }
 
     private void button1(ActionEvent e) {
         // TODO add your code here
-        new addOrupdatePart(this,operate);
+        new addOrupdatePart(this, operate);
     }
 
     private void initComponents() {
@@ -51,7 +52,7 @@ public class updatePart extends JFrame {
         //======== this ========
         var contentPane = getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-
+        setVisible(true);
         //======== panel6 ========
         {
             panel6.setLayout(new BoxLayout(panel6, BoxLayout.X_AXIS));

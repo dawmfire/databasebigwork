@@ -42,7 +42,7 @@ public class InOutBoundRecords extends JFrame {
         button1 = new JButton();
         button2 = new JButton();
         query = new Query();
-      //  tableHeader =new String[99][6];
+        tableHeader =new String[0][6];
         columnNames = new String[] { "操作人id","操作人名字","零件id", "零件名字", "操作时间", "操作数量"};
         model = new DefaultTableModel(tableHeader,columnNames){
             //设置表格全部行列都不可以编辑
@@ -60,9 +60,9 @@ public class InOutBoundRecords extends JFrame {
         table.getTableHeader().setResizingAllowed(false);
         //======== panel1 ========
         {
-            panel1.add(new JScrollPane(table),BorderLayout.CENTER);
-            panel1.setLayout(new BorderLayout());
 
+            panel1.setLayout(new BorderLayout());
+            panel1.add(new JScrollPane(table),BorderLayout.CENTER);
             //======== panel2 ========
             {
                 panel2.setLayout(null);

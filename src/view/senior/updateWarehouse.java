@@ -48,7 +48,7 @@ public class updateWarehouse extends JFrame {
         //======== this ========
         var contentPane = getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-
+        setVisible(true);
         //======== panel4 ========
         {
             panel4.setLayout(new BoxLayout(panel4, BoxLayout.X_AXIS));

@@ -5,14 +5,18 @@ import java.util.ArrayList;
 
 public class Query {
     String Sql;
+    int x;
+    String y;
     ResultSet rs;
     managerRecord ma;
     partRecord pa;
+    bound inout;
     warehouseRecord wa;
     int columnCount;
     PreparedStatement preSql;
     String[][] tableHeader;
     String[] oneManager;
+    ArrayList<bound> bo; //出入库记录的集合
     ArrayList<warehouseRecord> ware;    // 库房信息的集合
     ArrayList<partRecord> part;  //零件信息的集合
     ArrayList<managerRecord> manager;      //管理员信息储存的集合
@@ -608,9 +612,10 @@ public class Query {
     }
 
     //添加更新零件
+
     public void updateaddPart(String operate, partRecord part) {
         if(operate.equals("添加")){
-            Sql="insert into part(pname,specs,price,amount,Wid) vules(?,?,?,?,?)";
+            Sql="insert into part(pname,specs,price,amount,Wid) values(?,?,?,?,?)";
             try {
                 preSql = con.prepareStatement(Sql);
                 preSql.setString(1,part.getPartName());
@@ -619,19 +624,22 @@ public class Query {
                 preSql.setInt(4,part.getAmount());
                 preSql.setInt(5,part.getWarehouseID());
                 int ok = preSql.executeUpdate();
-                Sql="select Pid from part where panme=?";  // 找新插入的零件id
+                Sql="select Pid from part where pname=?";  // 找新插入的零件id
                 preSql = con.prepareStatement(Sql);
                 preSql.setString(1,part.getPartName());
                 rs=preSql.executeQuery();
+
+                while(rs.next()) {
+                    x =rs.getInt(1);
+                }
                 Sql="DELETE FROM store WHERE Pid is NULL AND Wid=?";
                 preSql = con.prepareStatement(Sql);
                 preSql.setInt(1,part.getWarehouseID());
                 ok = preSql.executeUpdate();
-                preSql.setInt(1,part.getWarehouseID());
                 Sql="insert into store(Wid,Pid,number) values(?,?,?)";
                 preSql = con.prepareStatement(Sql);
                 preSql.setInt(1,part.getWarehouseID());
-                preSql.setInt(1,rs.getInt(1));
+                preSql.setInt(1,x);
                 preSql.setInt(1,part.getWareAmount());
                 ok = preSql.executeUpdate();
                 con.close();
@@ -639,19 +647,30 @@ public class Query {
                 e.printStackTrace();
             }
         }else{
-            Sql="update part set pname=?,specs=?,price=?,amount=? where Pid=(select Pid from part where pname =?)";
+
+
             try {
+                Sql="update part set specs=?,price=?,amount=? where pname=?";
+                preSql = con.prepareStatement(Sql);
+
+                preSql.setString(1,part.getSpecs());
+                preSql.setDouble(2,part.getPrice());
+                preSql.setInt(3,part.getAmount());
+
+                preSql.setString(4,part.getPartName());
+                int ok = preSql.executeUpdate();
+                Sql="select Wid from part where pname =?";
                 preSql = con.prepareStatement(Sql);
                 preSql.setString(1,part.getPartName());
-                preSql.setString(2,part.getSpecs());
-                preSql.setDouble(3,part.getPrice());
-                preSql.setInt(4,part.getAmount());
-                preSql.setString(5,part.getPartName());
-                int ok = preSql.executeUpdate();
-                Sql="update store set number=?where Wid=(select Wid from part where pname =?)";
+                rs= preSql.executeQuery();
+                while(rs.next()) {
+                    x =rs.getInt(1);
+                }
+                Sql="update store set number=?where Wid=?";
                 preSql = con.prepareStatement(Sql);
                 preSql.setInt(1,part.getWareAmount());
-                preSql.setString(2,part.getPartName());
+                preSql.setInt(2,x);
+                ok = preSql.executeUpdate();
                 con.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -673,21 +692,25 @@ public class Query {
                 preSql = con.prepareStatement(Sql);
                 preSql.setString(1,wa.getWarehouseName());
                 rs=preSql.executeQuery();
+                while (rs.next()) {
+                    x=rs.getInt(1);
+                }
                 Sql="insert into store (Wid) values (?)";
                 preSql = con.prepareStatement(Sql);
-                preSql.setString(1, rs.getString(1));
+                preSql.setInt(1, x);
                 con.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
         }else{
-            Sql="update warehouse set widname=?,address=?,area=? where Wid=(select max(Mid) from warehouse)";
+            Sql="update warehouse set widname=?,address=?,area=? where Wid=?";
             try {
                 preSql = con.prepareStatement(Sql);
                 preSql.setString(1,wa.getWarehouseName());
                 preSql.setString(2,wa.getAddress());
                 preSql.setDouble(3,wa.getArea());
+                preSql.setInt(4,wa.getWarehouseID());
                 preSql.executeUpdate();
                 con.close();
             } catch (SQLException e) {
@@ -699,7 +722,53 @@ public class Query {
     }
 
     //出入库记录
-    public void inoutlookRecord(String operater ){
-
+    public String [][] inoutlookRecord(String operater ){
+            if(operater.equals("出库")){
+                Sql="select * from recordout";
+            }else{
+                Sql="select * from recordin";
+            }
+        try {
+            preSql = con.prepareStatement(Sql);
+            rs = preSql.executeQuery();
+            ResultSetMetaData metadata = rs.getMetaData();// 获得元数据的数据集对象
+            columnCount = metadata.getColumnCount();
+            bo = new ArrayList<>();
+            while (rs.next()) {
+                inout = new bound();
+                inout.setManagerID(rs.getInt(1));
+                inout.setManagerName(rs.getString(2));
+                inout.setPartID(rs.getInt(3));
+                inout.setPartName(rs.getString(4));
+                inout.setTime(rs.getString(5));
+                inout.setInoutpartamount(rs.getInt(6));
+                inout.setBoundID(rs.getInt(7));
+                bo.add(inout);
+            }
+            tableHeader = new String[bo.size()][columnCount];
+            for (int i = 0; i < bo.size(); i++) {
+                inout = bo.get(i);
+                for (int j = 0; j < columnCount; j++) {
+                    if (j == 0) {
+                        tableHeader[i][j] = String.valueOf(inout.getManagerID());
+                    } else if (j == 1) {
+                        tableHeader[i][j] = inout.getManagerName();
+                    } else if (j == 2) {
+                        tableHeader[i][j] = String.valueOf(inout.getPartID());
+                    } else if (j == 3) {
+                        tableHeader[i][j] = inout.getPartName();
+                    } else if (j == 4) {
+                        tableHeader[i][j] = inout.getTime();
+                    } else if (j == 5) {
+                        tableHeader[i][j] = String.valueOf(inout.getInoutpartamount());
+                    } else {
+                        tableHeader[i][j] = String.valueOf(inout.getBoundID());
+                    }
+                }
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }return tableHeader;
     }
 }

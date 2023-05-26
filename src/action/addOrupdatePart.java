@@ -15,7 +15,8 @@ public class addOrupdatePart {
     }
     public void startupdatePart(){
         Query qe = new Query();
-
+        Query qe1 = new Query();
+        Query qe2 = new Query();
 
         partRecord part = new partRecord();
         part.setPartName(updatePart.textField2.getText());
@@ -38,11 +39,12 @@ public class addOrupdatePart {
             part.setAmount(Integer.valueOf(updatePart.textField5.getText()));
 
         }else{
-            String[][] widInformation =qe.findwarehouseRecord(updatePart.textField6.getText());
+
+            String[][] widInformation =qe1.findwarehouseRecord(updatePart.textField6.getText());
             part.setAmount(0);
             part.setWareAmount(Integer.valueOf(widInformation[0][5]));
         }
         part.setWarehouseID(Integer.valueOf(updatePart.textField6.getText()));
-        qe.updateaddPart(operate,part);
+        qe2.updateaddPart(operate,part);
     }
 }
