@@ -4,7 +4,7 @@
 
 package view.senior;
 
-import action.warehouseInformationAction;
+import action.warehouseInformationFindAction;
 import base.Query;
 
 import java.awt.*;
@@ -41,7 +41,7 @@ public class WarehouseInformationManager extends JFrame {
     //≤È’“
     private void button1(ActionEvent e) {
         // TODO add your code here
-       new warehouseInformationAction(this);
+       new warehouseInformationFindAction(this);
     }
 
     private void initComponents() {

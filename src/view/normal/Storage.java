@@ -21,7 +21,7 @@ public class Storage extends JFrame {
         this.ma = ma;
         initComponents();
     }
-    //Èë¿â¼àÌıÆ÷
+    //Èë¿âÏìÓ¦
     private void button1(ActionEvent e) {
         // TODO add your code here
         storeAction in = new storeAction(ma,this);

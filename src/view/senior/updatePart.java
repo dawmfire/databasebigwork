@@ -13,7 +13,7 @@ import javax.swing.*;
  * @author unknown
  */
 public class updatePart extends JFrame {
-    String operate;
+    String operate;//添加或者更新（二选一）
 
     public updatePart() {
         initComponents();

@@ -27,7 +27,7 @@ public class Administrator extends JFrame {
         administratorFindAction am =new administratorFindAction(textField1.getText(),this,"ÆÕÍ¨");
         am.actionPerformed();
     }
-
+    //ÍË³ö
     private void button3(ActionEvent e) {
         // TODO add your code here
         dispose();

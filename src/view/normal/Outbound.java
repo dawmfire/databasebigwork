@@ -22,7 +22,7 @@ public class Outbound extends JFrame {
         this.ma = ma;
         initComponents();
     }
-    //³ö¿â¼àÌıÆ÷
+    //³ö¿âÏìÓ¦
     private void button1(ActionEvent e) {
         // TODO add your code here
         outAction out = new outAction(ma,this);

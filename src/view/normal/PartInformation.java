@@ -24,7 +24,7 @@ public class PartInformation extends JFrame {
         // TODO add your code here
         dispose();
     }
-    //以零件名为条件
+    //以零件名为条件，零件响应
     private void button1(ActionEvent e) {
         // TODO add your code here
         partInformationFindAction pa= new partInformationFindAction(this,textField1.getText());

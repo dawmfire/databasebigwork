@@ -14,7 +14,7 @@ import javax.swing.*;
  * @author unknown
  */
 public class updateWarehouse extends JFrame {
-    String operate;
+    String operate;//添加或者更新（二选一）
     public updateWarehouse() {
         initComponents();
     }

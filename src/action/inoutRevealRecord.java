@@ -1,9 +1,9 @@
 package action;
 
 import base.Query;
-import base.bound;
+import base.inoutBound;
 import view.senior.InOutBoundRecords;
-
+//--------用于显示出入库记录-----------
 public class inoutRevealRecord {
     InOutBoundRecords inOutBoundRecords;
     String operater;
@@ -17,7 +17,7 @@ public class inoutRevealRecord {
 
     private void startRecords() {
         Query qe = new Query();
-        bound bo = new bound();
+        inoutBound bo = new inoutBound();
         tableHeader = qe.inoutlookRecord(operater);
         for (int i = 0; i != inOutBoundRecords.model.getRowCount(); ) {
             inOutBoundRecords.model.removeRow(0);

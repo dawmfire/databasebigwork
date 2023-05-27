@@ -174,6 +174,7 @@ public class PersonalInformationManager extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
+
     public  void display(){
         label11.setText(String.valueOf(ma.getId())); //¹¤ºÅ
         label12.setText(ma.getName());  //ÐÕÃû

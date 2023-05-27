@@ -23,6 +23,7 @@ public class PersonalInformation extends JFrame {
         initComponents();
         display();
     }
+    //个人信息显示响应
 public void display(){
     personInformationAction pe = new personInformationAction(ma,this);
     pe.reveal();

@@ -2,7 +2,7 @@ package action;
 
 import base.Query;
 import view.senior.deleteChange;
-
+//--------用于管理员，零件，库房信息删除-------
 public class deleteAction {
     deleteChange deleteChange;
     String choose;
@@ -13,7 +13,7 @@ public class deleteAction {
     }
     public void startDelete(){
         Query qe= new Query();
-
+        //以id为主
         qe.deleteInformation(deleteChange.textField1.getText(),choose);
 
 

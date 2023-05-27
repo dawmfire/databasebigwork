@@ -1,6 +1,6 @@
 package base;
 
-public class bound {
+public class inoutBound {
 
     private int managerID; //管理员id
     private int partID;         // 零件id

@@ -4,7 +4,7 @@
 
 package view.normal;
 
-import action.warehouseInformationAction;
+import action.warehouseInformationFindAction;
 import base.Query;
 
 import java.awt.*;
@@ -22,7 +22,7 @@ public class WarehouseInformation extends JFrame {
 
     private void button1(ActionEvent e) {
         // TODO add your code here
-        warehouseInformationAction wa =new warehouseInformationAction(this);
+        warehouseInformationFindAction wa =new warehouseInformationFindAction(this);
     }
 
     private void initComponents() {

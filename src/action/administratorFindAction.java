@@ -6,7 +6,7 @@ import view.senior.AdministratorManager;
 
 import javax.swing.*;
 
-
+//管理员信息搜索响应
 public class administratorFindAction {
     String Mid;
     Administrator am;

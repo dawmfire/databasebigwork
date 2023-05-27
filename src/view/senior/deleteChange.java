@@ -14,7 +14,7 @@ import javax.swing.*;
  * @author unknown
  */
 public class deleteChange extends JFrame {
-    String choose;
+    String choose;  //选择操作的那个类（管理员，库房，零件）
     public deleteChange(String choose) {
 
         this.choose = choose;

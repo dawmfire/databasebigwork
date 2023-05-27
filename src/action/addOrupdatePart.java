@@ -19,9 +19,9 @@ public class addOrupdatePart {
         Query qe2 = new Query();
 
         partRecord part = new partRecord();
-        part.setPartName(updatePart.textField2.getText());
-        part.setSpecs(updatePart.textField3.getText());
-        part.setPrice(Double.valueOf(updatePart.textField4.getText()));
+        part.setPartName(updatePart.textField2.getText());//零件名字
+        part.setSpecs(updatePart.textField3.getText());//零件规格
+        part.setPrice(Double.valueOf(updatePart.textField4.getText()));//零件价格
         //如果不为0，属于更新的步骤，为0属于添加零件步骤
         /*
         更新若以warehouseid为条件，则出现多种结果，若以名字为主，则出现一个结果
@@ -29,6 +29,7 @@ public class addOrupdatePart {
          */
         if(Integer.valueOf(updatePart.textField5.getText())!=0){
             storePartRecord sd =qe.findOnePart(updatePart.textField2.getText());
+            //判断更新的零件的存量是否大于之前的存量，是否需要更改之前的库存信息。
             if(sd.getAmount()>Integer.valueOf(updatePart.textField5.getText())){
                 int x=sd.getAmount()-Integer.valueOf(updatePart.textField5.getText());
                 part.setWareAmount(sd.getNumber()-x);

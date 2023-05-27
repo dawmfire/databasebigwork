@@ -5,7 +5,7 @@ import view.normal.PartInformation;
 import view.senior.PartInformationManager;
 
 import javax.swing.*;
-
+//零件搜索响应
 public class partInformationFindAction {
     PartInformation partInformation;
     PartInformationManager partInformationManager;
@@ -16,10 +16,12 @@ public class partInformationFindAction {
         this.partInformation = partInformation;
         this.pname = pname;
     }
+        //高级管理员调用
 
     public partInformationFindAction(PartInformationManager partInformationManager, String text) {
         this.partInformationManager = partInformationManager;
         this.text = text;
+        findpartManagerRecord();
     }
 
     //普通管理员的搜索

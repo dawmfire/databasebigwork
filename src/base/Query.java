@@ -6,17 +6,16 @@ import java.util.ArrayList;
 public class Query {
     String Sql;
     int x;
-    String y;
     ResultSet rs;
     managerRecord ma;
     partRecord pa;
-    bound inout;
+    inoutBound inout;
     warehouseRecord wa;
     int columnCount;
     PreparedStatement preSql;
     String[][] tableHeader;
     String[] oneManager;
-    ArrayList<bound> bo; //出入库记录的集合
+    ArrayList<inoutBound> bo; //出入库记录的集合
     ArrayList<warehouseRecord> ware;    // 库房信息的集合
     ArrayList<partRecord> part;  //零件信息的集合
     ArrayList<managerRecord> manager;      //管理员信息储存的集合
@@ -612,7 +611,6 @@ public class Query {
     }
 
     //添加更新零件
-
     public void updateaddPart(String operate, partRecord part) {
         if(operate.equals("添加")){
             Sql="insert into part(pname,specs,price,amount,Wid) values(?,?,?,?,?)";
@@ -735,7 +733,7 @@ public class Query {
             columnCount = metadata.getColumnCount();
             bo = new ArrayList<>();
             while (rs.next()) {
-                inout = new bound();
+                inout = new inoutBound();
                 inout.setManagerID(rs.getInt(1));
                 inout.setManagerName(rs.getString(2));
                 inout.setPartID(rs.getInt(3));

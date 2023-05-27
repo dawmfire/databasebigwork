@@ -4,9 +4,14 @@ import base.Query;
 import base.managerRecord;
 import view.normal.PersonalInformation;
 
+
+
+//-------个人信息进行显示---------
+
 public class personInformationAction {
     managerRecord ma;
     PersonalInformation personalInformation;
+
 
     public personInformationAction(managerRecord ma, PersonalInformation personalInformation) {
         this.ma = ma;

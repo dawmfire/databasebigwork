@@ -6,15 +6,16 @@ import view.senior.WarehouseInformationManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
-public class warehouseInformationAction {
+//库房搜索响应
+public class warehouseInformationFindAction {
     WarehouseInformation warehouse;
     String widname;
     String [][] tableHeader;
     Query qe = new Query();
     DefaultTableModel model;
     WarehouseInformationManager warehouseInformationManager;
-    public warehouseInformationAction(WarehouseInformation warehouse) {
+    //普通管理员调用
+    public warehouseInformationFindAction(WarehouseInformation warehouse) {
 
         this.warehouse = warehouse;
         widname=warehouse.textField1.getText();
@@ -23,8 +24,8 @@ public class warehouseInformationAction {
         warefindRecord();
 
     }
-
-    public warehouseInformationAction(WarehouseInformationManager warehouseInformationManager) {
+    //高级管理员调用
+    public warehouseInformationFindAction(WarehouseInformationManager warehouseInformationManager) {
 
         this.warehouseInformationManager = warehouseInformationManager;
         widname=warehouseInformationManager.textField1.getText();
@@ -34,10 +35,12 @@ public class warehouseInformationAction {
     }
 
     public  void  warefindRecord(){
+        //首先删除表格内原有的数据
         if (!widname.equals("")) {
             for (int i = 0; i!=model.getRowCount(); ) {
                 model.removeRow(0);
             }
+            //然后载入新的二维数组内的搜索查询数据
             System.out.println(tableHeader.length);
             for (int i = 0; i < tableHeader.length; i++) {
 

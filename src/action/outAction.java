@@ -1,18 +1,20 @@
 package action;
 
 import base.Query;
-import base.bound;
+import base.inoutBound;
 import base.managerRecord;
 import base.storePartRecord;
 import view.normal.Outbound;
 
 import javax.swing.*;
 
+//---------普通管理员的出库处理
+
 public class outAction {
     managerRecord ma;
     Outbound out;
     storePartRecord storepart;
-    bound record;
+    inoutBound record;
     public outAction(managerRecord ma, Outbound out) {
         this.ma =ma;
         this.out =out;
@@ -23,7 +25,7 @@ public class outAction {
         Query qe = new Query();
         //提取输入值零件名
         storepart = qe.findOnePart(out.textField2.getText());
-        record= new bound();
+        record= new inoutBound();
         //判断是否搜索到零件在库房中
         if (storepart != null) {
             //判断零件是否存入同一个库房，防止存储多个库房

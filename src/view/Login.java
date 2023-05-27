@@ -5,19 +5,17 @@ import action.LoginAction;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-/*
- * Created by JFormDesigner on Fri May 19 13:22:01 CST 2023
- */
-
-
 
 /**
  * @author unknown
  */
+//---------登录界面--------
 public class Login extends JFrame {
     public Login() {
         initComponents();
     }
+
+    //登录按钮响应
 
     private void button1(ActionEvent e) {
         // TODO add your code here

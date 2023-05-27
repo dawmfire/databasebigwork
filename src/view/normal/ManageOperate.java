@@ -21,32 +21,32 @@ public class ManageOperate extends JFrame {
         initComponents();
     }
 
-    private void button12(ActionEvent e) { // 管理员监听器
+    private void button12(ActionEvent e) { // 管理员响应
         // TODO add your code here
         new Administrator();
     }
 
-    private void button10(ActionEvent e) {//入库监听器
+    private void button10(ActionEvent e) {//入库响应
         // TODO add your code here
         new Storage(ma);
     }
 
-    private void button9(ActionEvent e) { //出库监听器
+    private void button9(ActionEvent e) { //出库响应
         // TODO add your code here
         new Outbound(ma);
     }
 
-    private void button7(ActionEvent e) {  // 个人信息监听器
+    private void button7(ActionEvent e) {  // 个人信息响应
         // TODO add your code here
         new PersonalInformation(ma);
     }
 
-    private void button8(ActionEvent e) { //库房信息监听器
+    private void button8(ActionEvent e) { //库房信息响应
         // TODO add your code here
         new WarehouseInformation();
     }
 
-    private void button11(ActionEvent e) { // 零件信息监听器
+    private void button11(ActionEvent e) { // 零件信息响应
         // TODO add your code here
         new PartInformation();
     }
